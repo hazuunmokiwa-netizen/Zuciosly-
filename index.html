@@ -1,0 +1,126 @@
+REAL SYSTEM YA ZUCIOSLY
+
+Hii ni mfumo wa kweli wa online shop: backend, database, na frontend. Inafanya kazi kama website za biashara halisi.
+
+TECH STACK
+Node.js + Express backend
+SQLite database
+Simple HTML frontend
+WhatsApp order fallback
+
+---
+
+1. SETUP YA FOLDER
+
+Zuciosly/
+server.js
+db.js
+package.json
+public/
+index.html
+
+---
+
+2. BACKEND (server.js)
+
+const express = require("express")
+const sqlite3 = require("sqlite3").verbose()
+const app = express()
+
+app.use(express.json())
+app.use(express.static("public"))
+
+const db = new sqlite3.Database("shop.db")
+
+db.run("CREATE TABLE IF NOT EXISTS products(id INTEGER PRIMARY KEY, name TEXT, price INTEGER, img TEXT)")
+db.run("CREATE TABLE IF NOT EXISTS orders(id INTEGER PRIMARY KEY, items TEXT, total INTEGER)")
+
+app.get("/products", (req, res) => {
+db.all("SELECT * FROM products", (err, rows) => {
+res.json(rows)
+})
+})
+
+app.post("/products", (req, res) => {
+const {name, price, img} = req.body
+db.run("INSERT INTO products(name,price,img) VALUES (?,?,?)",
+[name, price, img])
+res.send("ok")
+})
+
+app.post("/orders", (req, res) => {
+const {items, total} = req.body
+db.run("INSERT INTO orders(items,total) VALUES (?,?)",
+[JSON.stringify(items), total])
+res.send("order saved")
+})
+
+app.listen(3000)
+
+---
+
+3. FRONTEND (public/index.html)
+
+Zuciosly Store
+
+Products section
+
+<div id="products"></div>
+
+Cart: <span id="cartCount">0</span>
+
+Checkout button
+
+script:
+
+let cart = []
+
+fetch("/products")
+.then(r => r.json())
+.then(data => {
+let html = ""
+data.forEach(p => {
+html +=
+"<div>" +
+p.name + " " + p.price +
+"<button onclick='add(" + JSON.stringify(p) + ")'>Add</button>" +
+"</div>"
+})
+document.getElementById("products").innerHTML = html
+})
+
+function add(p){
+cart.push(p)
+document.getElementById("cartCount").innerText = cart.length
+}
+
+function checkout(){
+let total = 0
+cart.forEach(i => total += i.price)
+
+fetch("/orders", {
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body: JSON.stringify({items:cart,total})
+})
+
+let msg = "ORDER ZUCIOSLY "
+cart.forEach(i => msg += i.name + " ")
+window.open("[https://wa.me/2557XXXXXXXX?text=](https://wa.me/2557XXXXXXXX?text=)" + msg)
+}
+
+---
+
+4. RUN SYSTEM
+
+Steps:
+
+install Node.js
+run:
+
+npm init -y
+npm install express sqlite3
+node server.js
+
+open:
+[http://localhost:3000](http://localhost:3000)kend
