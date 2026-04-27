@@ -56,17 +56,17 @@ Cart: <span id="count">0</span><br>
 <script>
 
 let products = [
-{name:"Classic Shirt",price:35000,cat:"men"},
-{name:"Black Jeans",price:45000,cat:"men"},
-{name:"Polo T-shirt",price:25000,cat:"men"},
-{name:"Elegant Dress",price:50000,cat:"women"},
-{name:"Ladies Top",price:28000,cat:"women"},
-{name:"Maxi Dress",price:55000,cat:"women"},
-{name:"Sneakers",price:60000,cat:"shoes"},
-{name:"Heels",price:55000,cat:"shoes"},
-{name:"Sandals",price:30000,cat:"shoes"},
-{name:"Black Sunglasses",price:20000,cat:"sunglasses"},
-{name:"Gold Sunglasses",price:25000,cat:"sunglasses"}
+{name:"Classic Shirt",price:35000,cat:"men",img:"LINK_YA_PICHA"},
+{name:"Black Jeans",price:45000,cat:"men",img:"LINK_YA_PICHA"},
+{name:"Polo T-shirt",price:25000,cat:"men",img:"LINK_YA_PICHA"},
+{name:"Elegant Dress",price:50000,cat:"women",img:"LINK_YA_PICHA"},
+{name:"Ladies Top",price:28000,cat:"women",img:"LINK_YA_PICHA"},
+{name:"Maxi Dress",price:55000,cat:"women",img:"LINK_YA_PICHA"},
+{name:"Sneakers",price:60000,cat:"shoes",img:"LINK_YA_PICHA"},
+{name:"Heels",price:55000,cat:"shoes",img:"LINK_YA_PICHA"},
+{name:"Sandals",price:30000,cat:"shoes",img:"LINK_YA_PICHA"},
+{name:"Black Sunglasses",price:20000,cat:"sunglasses",img:"LINK_YA_PICHA"},
+{name:"Gold Sunglasses",price:25000,cat:"sunglasses",img:"LINK_YA_PICHA"},
 ];
 
 let cart = [];
